@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<title>Marius Hoggenmüller</title>
+	<meta name="author" content="Marius Hoggenmüller" />
+	<meta name="description" content="Design Portfolio of Marius Hoggenmüller" />
+	<meta name="keywords"  content="interaction design,media architecture,design,research,urban interaction design,lighting design,portfolio" />
+	<meta name="Resource-type" content="Document" />
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" type="text/css" href="css/jquery.pagepiling.css" />
+	<link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css" />
+	<link rel="stylesheet" href="css/styles.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Radley" rel="stylesheet">
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"></script>
+
+	<script type="text/javascript" src="js/jquery.pagepiling.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/ScrollToPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
+
+	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+	<script src="js/main.js"></script>
+
+	<script src="js/velocity.min.js"></script>
+	<script src="js/bowser/src/bowser.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+
+			var on = false;
+
+			var urls = ['/shifting.html','/sketching.html','/lightbricks.html','orchestra.html','vivid.html','about.html'];
+
+			var character_count = $('.animated-text').text().length;
+
+			/*$(function () {
+				$('.tlt').textillate();
+			})*/
+
+			//alert(bowser.name);
+
+
+			/*
+			* Plugin intialization
+			*/
+	    	$('#pagepiling').pagepiling({
+	          	direction: 'horizontal',
+	    		menu: '#menu',
+	    		anchors: ['intro','page1', 'page2', 'page3', 'page4', 'page5', 'about'],
+			    sectionsColor: ['black', 'black', 'black', 'black', 'black'],
+				sectionsImage: ['url(imgs/about.jpg)','url(imgs/image95.jpg)','url(imgs/image21.jpg)','url(imgs/image20.jpg)','url(imgs/image19.jpg)','url(imgs/image18.jpg)','url(imgs/about.jpg)'],
+				sectionsPercent: ['50%','50%','30%','30%','30%','30%','50%'],
+				/*navigation: {
+			    	'position': 'right',
+			   		'tooltips': ['Page 1', 'Page 2', 'Page 3', 'Pgae 4']
+			   	},*/
+			    afterRender: function(){
+			    	$('#pp-nav').addClass('custom');
+
+					console.log("after pagepilling");
+
+					// Init ScrollMagic
+					var controller = new ScrollMagic.Controller();
+
+					// get all slides
+					var slides = ["#slide01", "#slide02", "#slide03"];
+
+					// move bcg container when slide gets into the view
+					slides.forEach(function (slide, index) {
+
+						var $bcg = $(slide).find('.section');
+
+						var slideParallaxScene = new ScrollMagic.Scene({
+							triggerElement: slide,
+							triggerHook: 1,
+							duration: "100%"
+						})
+								.setTween(TweenMax.from($bcg, 1, {y: '-40%', autoAlpha: 0.3, ease:Power0.easeNone}))
+								.addTo(controller);
+					});
+
+					// SCENE 5 - parallax effect on the intro slide
+					// move bcg container when intro gets out of the the view
+
+					var introTl = new TimelineMax();
+
+					introTl
+							.to($('.abstract, .tools'), 0.4, {autoAlpha: 0, ease:Power1.easeNone})
+							//.to($('.headers'), 0.8, {y: '30%', ease:Power1.easeOut}, '-=0.2')
+							.to($('.section .bcg'), 1.4, {y: '40%', ease:Power1.easeOut}, '-=0.4')
+							//.to($('h2, h1'), 5.4, {y: '10%', ease:Power1.easeOut}, '-=0.2')
+							.to($('.section .bcg'), 0.7, {autoAlpha: 0.5, ease:Power1.easeNone}, '-=1.4');
+
+					var introScene = new ScrollMagic.Scene({
+						triggerElement: '#pagepiling',
+						triggerHook: 0,
+						duration: "100%"
+					})
+							.setTween(introTl)
+							.addTo(controller);
+			    },
+				onLeave: function(index, nextIndex, direction){
+			    	console.log("LEAVE");
+
+				},
+			    afterLoad: function(anchorLink, index){
+			    	if(index>1){
+			    		$('#pp-nav').removeClass('custom');
+			    	}else{
+			    		$('#pp-nav').addClass('custom');
+			    	}
+					if(anchorLink == "about"){
+
+						$('.header-top').addClass('about');
+
+						$('#wrapper').css('position', 'absolute');
+
+						$('html, body').animate({
+							scrollTop:$('h2').offset().top
+						},'slow', function(){
+							console.log(anchorLink);
+							$('body').css('overflow', 'auto');
+							$('html').css('overflow', 'auto');
+						});
+
+						$('.content').load(urls[index-2], function(){
+
+							console.log(index-2);
+
+						});
+
+					}else{
+						$('.header-top').removeClass('about');
+
+						$('body').css('overflow', 'hidden');
+						$('html').css('overflow', 'hidden');
+
+						$('#wrapper').css('position', 'fixed');
+					};
+			    }
+			}, function(){
+
+
+
+
+			});
+
+			$('.button').click(function(){
+
+				var index = $( ".button" ).index( this );
+				console.log(index);
+
+				$('.content').load(urls[index], function() {
+					//$('.content').css("opacity","0");
+					//$('.content').animate({opcaity:"0"}, 0).animate({opacity:"100"},400);
+
+					//delay(1);
+
+					$('body').css('overflow', 'auto');
+					$('html').css('overflow', 'auto');
+
+					$('#wrapper').css('position', 'absolute');
+
+					$('#pp-nav').animate({opacity:"0"}, 400);
+
+					$('.button').animate({opacity: "0"}, 1, function(){
+						$('.button').css('display', 'none');
+					});
+
+					$('.header-top').addClass('open');
+					$('a').remove('.toggle-menu');
+					$('.header-top').append("<a class='l-right close'><i class='fa fa-times' aria-hidden='true'></i></a>");
+
+					$('html, body').animate({
+						scrollTop:$('h2').offset().top - 70
+					},'slow');
+
+					$.fn.pagepiling.setAllowScrolling(false);
+
+				});
+
+				/*$.ajax({
+					crossOrigin: true,
+					url: "/shifting.html",
+					success: function(data) {
+						$( '.content' ).html(data);
+					}
+				});*/
+
+			});
+
+			$('.header-top').on('click', '.close', function(){
+				console.log("close1");
+				$('.header-top').removeClass('open');
+				$('a').remove('.close');
+				$('.header-top').append("<a class='l-right toggle-menu' href='#'><i></i><i></i><i></i></a>");
+				$('.button').css('display', 'table-cell');
+				$('.button').css('opacity', '1.0');
+				$('.abstract').css('opacity', '1.0');
+				$('.abstract').css('visibility', 'inherit');
+				$('.bcg').css('transform', 'translate(0%, 0%)');
+				$('.bcg').css('opacity', '1.0');
+
+				//$('html, body').css('scrollTop', '0');
+
+				$('body').css('overflow', 'hidden');
+				$('html').css('overflow', 'hidden');
+
+				$('#wrapper').css('position', 'fixed');
+				$('#pp-nav').css('opacity', '1.0');
+
+				$.fn.pagepiling.setAllowScrolling(true);
+
+			});
+
+
+			if(bowser.mobile==true && bowser.safari==true){
+
+				$('.pp-tableCell').css('padding-bottom', '80px');
+
+				$('.button').css('margin-bottom', '65px');
+
+				$('.bcg').css('margin-top', '-65px');
+
+			}
+
+			if(bowser.mobile==true && bowser.chrome==true){
+
+				$('.pp-tableCell').css('padding-bottom', '0px');
+
+				$('.button').css('margin-bottom', '0px');
+
+			}
+
+			if(bowser.android==true && bowser.mobile==true && bowser.chrome==true){
+
+				$('.pp-tableCell').css('padding-bottom', '65px');
+
+				$('.button').css('margin-bottom', '65px');
+
+			}
+	    });
+
+
+	</script>
+
+
+    <style>
+
+	/*body,html  {
+		background-color: #000;
+		width: 100%;
+		min-height: 100%;
+		padding: 0;
+		margin: 0;
+	}*/
+	.scroll-downs {
+		z-index: 9999;
+		position: absolute;
+		right: 0;
+		bottom: 10px;
+		left: 0;
+		margin: auto;
+
+		width :34px;
+		height: 55px;
+	}
+	.mousey {
+		width: 3px;
+		padding: 7px 11px;
+		height: 25px;
+		border: 2px solid #fff;
+		border-radius: 25px;
+		opacity: 0.75;
+	}
+	.scroller {
+		width: 3px;
+		height: 10px;
+		border-radius: 25%;
+		background-color: #fff;
+		animation-name: scroll;
+		animation-duration: 2.2s;
+		animation-timing-function: cubic-bezier(.15,.41,.69,.94);
+		animation-iteration-count: infinite;
+	}
+	@keyframes scroll {
+		0% { opacity: 0; }
+		10% { transform: translateY(0); opacity: 1; }
+		100% { transform: translateY(15px); opacity: 0;}
+	}
+
+
+	/* colors
+	 * --------------------------------------- */
+	#colors2,
+	#colors3{
+		position: absolute;
+		height: 163px;
+		width: 362px;
+		z-index: 1;
+		background-repeat: no-repeat;
+		left: 0;
+		margin: 0 auto;
+		right: 0;
+	}
+	#colors2{
+		background-image: url(imgs/colors2.gif);
+		top:0;
+	}
+	#colors3{
+		background-image: url(imgs/colors3.gif);
+		bottom:0;
+	}
+
+
+	/* Overwriting fullPage.js tooltip color
+	* --------------------------------------- */
+	#pp-nav.custom .pp-tooltip{
+		color: #AAA;
+	}
+
+</style>
+
+</head>
+<body>
+    <header>
+	  <div class="header-top clearfix">
+		<h1 class="l-left"><a href="#firstSection">Marius Hoggenmüller</a></h1>
+		<a class="l-right toggle-menu" href="#">
+			<i></i>
+			<i></i>
+			<i></i>
+		</a>
+	  </div>
+	<header>
+
+	<div class="scroll-downs">
+		<div class="mousey">
+			<div class="scroller"></div>
+		</div>
+	</div>
+
+	<!--<div id="intro" class="header-container fs">
+		<div class="bcg"></div>
+		<header class="wrapper">
+			<h1 class="title">Build Something Amazing!</h1>
+			<p>Learn ScrollMagic and GreenSock to create your own site from scratch.</p>
+		</header>
+		<span class="scroll-hint">Scroll Down</span>
+	</div>
+
+
+		<div class="main-container">
+
+			<article id="cb01" class="content-block">
+				<div class="wrapper">
+					<header class="slideInUp">
+						<h1>SIMPLIFY</h1>
+					</header>
+					<section>
+						<p class="slideInUp slideInUp2">Simplify your content to a MINIMUM.</p>
+					</section>
+				</div>
+			</article>
+
+			<article id="slide01" class="slide fs">
+				<div class="bcg"></div>
+				<div class="wrapper">
+					<header class="slideInUp">
+						<h1>A picture is worth a thousand words</h1>
+					</header>
+					<section>
+						<p class="slideInUp slideInUp2">Let the images do the talking and use text for short summaries.</p>
+					</section>
+				</div>
+			</article>
+
+			<article id="cb02" class="content-block">
+				<div class="wrapper">
+					<header class="slideInUp">
+						<h1>FOCUS</h1>
+					</header>
+					<section>
+						<p class="slideInUp slideInUp2">Focus on the most IMPORTANT thing. The one thing!</p>
+					</section>
+				</div>
+			</article>
+
+			<article id="slide02" class="slide fs">
+				<div class="bcg"></div>
+				<div class="wrapper">
+					<header class="slideInUp">
+						<h1>Position and Timing</h1>
+					</header>
+					<section>
+						<p class="slideInUp slideInUp2">Position elements based on the background image and trigger animation at the right time.</p>
+						<p class="slideInUp slideInUp3">Use different triggerElements in combination with offsets to be in full control.</p>
+					</section>
+				</div>
+			</article>
+
+			<article id="cb03" class="content-block">
+				<div class="wrapper">
+					<header class="slideInUp">
+						<h1>ASK</h1>
+					</header>
+					<section>
+						<p class="slideInUp slideInUp2">You don't ask, you don't get. Always end with CALL TO ACTION.</p>
+					</section>
+				</div>
+			</article>
+
+			<article id="slide03" class="slide fs">
+				<div class="bcg"></div>
+				<div class="wrapper">
+					<header class="slideInUp">
+						<a href="https://ihatetomatoes.net/blog/" title="Petr Tichy's Front End Development Blog">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="iht_logo" x="0" y="0" viewBox="0 0 308.8 152.1" xml:space="preserve" enable-background="new 0 0 308.8 152.1" style="visibility: inherit; opacity: 1;">
+                            <style>
+                            .s0{
+								fill:#D74022;
+							}
+							.s1{
+								fill:#4D4D4F;
+							}
+							.s2{
+								fill:none;
+								stroke-linecap:round;
+								stroke-miterlimit:10;
+								stroke-width:10;
+								stroke:#FFF;
+							}
+
+                            </style>  <path d="M139.7 17.2C106 18.3 78.6 45.7 77.5 79.4 76.9 98 84.2 114.9 96.3 127l91-91C175.2 23.9 158.3 16.6 139.7 17.2z" fill="#D74022"></path>
+                              <path d="M122.3 127c12.1 12.1 29 19.4 47.6 18.8 33.7-1.1 61.1-28.5 62.2-62.2 0.6-18.6-6.7-35.5-18.8-47.6L122.3 127z" fill="#D74022"></path>
+                              <polygon points="238.3 152.1 225.6 139.3 283.4 81.5 225.6 23.8 238.3 11 308.8 81.5 " fill="#4D4D4F"></polygon>
+                              <polygon points="70.5 152.1 0 81.5 70.5 11 83.2 23.8 25.5 81.5 83.2 139.3 " fill="#4D4D4F"></polygon>
+                              <path d="M144.5 30.6" class="s2"></path>
+                              <path d="M132.6 30.4" class="s2"></path>
+                              <path d="M128.6 10.9c0-1.5 0-3 0.1-4.5 0.1-1.4 0.8-3.1 0.3-4.5 -0.8-2.5-4.3-2.6-5.5-0.3 -1.8 4.5-2.5 9.2-2.4 14 -6.7 3.2-17 2-24-0.2 5.1 4 11.2 6.7 18 7.5 -6.5 3-12.5 7-17.6 11.9 13.7-9.2 32.4-7.6 44.4 3.7 -1.3-4.6-3.5-8.7-6.4-12.3 7.3-5.2 16.3-7.4 25.1-6.3 -7-2.1-14.2-3-21.5-2.8 3.2-2.1 6-4.7 8.3-7.7 -6.3 3.5-11.4 4.1-18.5 4.4C128.8 13.2 128.7 11.6 128.6 10.9" fill="#95D600"></path>
+                            </svg>
+						</a>
+						<h1>Do you want to learn ScrollMagic?</h1>
+					</header>
+					<section>
+						<p class="slideInUp slideInUp2">Explore the source code and start learning ScrollMagic today.</p>
+						<div class="slideInUp slideInUp3">
+							<a href="https://ihatetomatoes.net/5-days-with-scrollmagic/" class="button">DOWNLOAD FILES</a>
+						</div>
+
+					</section>
+				</div>
+			</article>
+
+		</div>-->
+
+	<div id="wrapper">
+	<div id="pagepiling">
+		<div class="section" id="section1">
+			<div class="headers">
+				<h1 class="tlt">Hi, my name is Marius. I'm an interaction designer and researcher who loves to work with physical and digital materials.</h1>
+				<h1 class="tlt">Start scrolling to look at my design portfolio.</h1>
+
+				<!--<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" style="enable-background:new 0 0 225.2 79; height: 90px; width: 290px; transform: translate(873px,2px);" xml:space="preserve">
+					<style type="text/css">
+						.st0{fill:none;stroke:#FFFFFF;stroke-width:0.5;stroke-miterlimit:10;}
+						.st1{fill:none;stroke:#FFFFFF;stroke-miterlimit:10;}
+						.st2{fill:none;stroke:#FFFFFF;stroke-width:1.5;stroke-miterlimit:10;}
+						.st3{fill:none;stroke:#FFFFFF;stroke-width:3;stroke-miterlimit:10;}
+						.st4{fill:none;}
+					</style>
+
+				<g>
+					<line class="st0" x1="90.9" y1="51" x2="91" y2="3.5"/>
+					<polyline class="st0" points="94.2,2.8 94.2,6.5 96.7,8.4 96.7,8.4 94.2,10.3 94.2,10.5 96.7,12.4 96.7,12.4 94.2,14.3
+						94.2,14.5 96.7,16.3 96.7,16.4 94.2,18.2 94.2,18.4 96.7,20.3 96.7,20.3 94.2,22.2 94.2,22.4 96.7,24.3 96.7,24.3 94.2,26.2
+						94.2,26.4 96.7,28.3 96.7,28.3 94.1,30.1 94.2,30.3 96.7,32.2 96.7,32.2 94.1,34.1 94.1,34.3 96.6,36.2 96.7,36.2 94.1,38.1
+						94.1,38.3 96.6,40.2 96.6,40.2 94.1,42.1 94.1,42.2 96.6,44.1 96.6,44.1 94.1,46 94.1,51 			"/>
+					<path class="st1" d="M92.5,82.7L92.5,82.7c-2.6,0-4.6-2.1-4.6-4.7l0.1-19.2c0-2.6,2.1-4.6,4.7-4.6h0c2.6,0,4.6,2.1,4.6,4.7
+						l-0.1,19.2C97.2,80.7,95.1,82.7,92.5,82.7z"/>
+					<line class="st2" x1="91.2" y1="78.2" x2="91.3" y2="64.6"/>
+					<line class="st0" x1="91.4" y1="51.8" x2="91.4" y2="54.1"/>
+					<line class="st0" x1="93.6" y1="52.2" x2="93.6" y2="54.5"/>
+					<path class="st1" d="M92.7,82.6L92.7,82.6c-2.6,0-4.6-2.1-4.6-4.7l0.1-19.2c0-2.6,2.1-4.6,4.7-4.6h0c2.6,0,4.6,2.1,4.6,4.7
+						L97.4,78C97.4,80.5,95.3,82.6,92.7,82.6z"/>
+					<path class="st3" d="M95.1,51c0,0-69,0-69,0C13.3,51,2.9,41.7,2.9,30.3v-6.3C2.9,12,13.4,2.2,26.2,2.2l69,0"/>
+					<path class="st4" d="M0-0.1L4.3,11l0-0.1L8.5-0.1l0.4,0L13.3,11l0-0.1l4.2-11.1l0.4,0l4.3,11.1l0-0.1l4.2-11.1l0.4,0l4.3,11.1l0-0.1
+						l4.2-11.1l0.4,0l4.3,11.1l0-0.1l4.2-11.1l0.4,0l4.3,11.1l0-0.1l4.2-11.1l0.4,0L58,10.7l0-0.1l4.2-11.1l0.4,0L67,10.7l0-0.1l4.2-11.1
+						l0.4,0l4.3,11.1l0-0.1l4.2-11.1l0.4,0l4.3,11.1l0-0.1l4.2-11.1l0.3,0l4.3,11.1l0-0.1l4.2-11.1l0.4,0l4.3,11.1l0-0.1l4.2-11.1l0.4,0
+						l4.3,11.1l0-0.1l4.2-11.1l0.4,0l4.3,11.1l0-0.1l4.2-11.1l0.4,0l4.3,11.1l0-0.1l4.2-11.1l0.4,0l4.3,11.1l0-0.1l4.2-11.1l0.4,0
+						l4.3,11.1l0-0.1l4.2-11.1l0.4,0l4.3,11.1l0-0.1l4.2-11.1l0.4,0l4.3,11.1l0-0.1L169.5-1l0.4,0l4.3,11.1l0-0.1L178.4-1" id="theMotionPath"/>
+					<animateMotion dur="5s" repeatCount="none" calcMode="paced"
+            			values="0; 200; 5500">
+          				<mpath xlink:href="#theMotionPath"/>
+    				</animateMotion>
+				</g>
+			</svg>-->
+
+			</div>
+		</div>
+	    <div class="section" id="section1">
+			<div class="headers">
+				<h2>Luminaire Design</h2>
+				<h1>Light Shifting Display</h1>
+			</div>
+			<div class="abstract">The Light Shifting Display is a transformable lighting display that presents real-time information in an ambient manner, and explores the boundaries between display and luminaire design.</div>
+			<div class="tools"><i class="fa fa-cubes" aria-hidden="true"></i>Java with Processing, Meteor, Raspbian, Arduino</div>
+			<div class="button"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
+	    </div>
+	    <div class="section" id="section2">
+			<h2>Prototyping Tool</h2>
+			<h1>Sketching-in-Light</h1>
+			<div class="abstract">Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution lighting displays as well as content variations using different materials.</div>
+			<div class="tools"><i class="fa fa-cubes" aria-hidden="true"></i>iOS (Swift)</div>
+			<div class="button"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
+		</div>
+	    <div class="section" id="section3">
+			<h2>Prototyping Tool</h2>
+			<h1>LightBricks</h1>
+			<div class="abstract">LightBricks is intended to build miniature models of low-resolution media facades and pre-test visual content rapidly and at low cost.</div>
+			<div class="tools"><i class="fa fa-cubes" aria-hidden="true"></i>Java with Processing, Arduino</div>
+			<div class="button"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
+		</div>
+		<div class="section" id="section4">
+			<h2>Light installation</h2>
+			<h1>Orkhestra</h1>
+			<div class="abstract">Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution lighting displays as well as content variations using different materials.</div>
+			<div class="tools"><i class="fa fa-cubes" aria-hidden="true"></i>Java with Processing</div>
+			<div class="button"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
+		</div>
+		<div class="section" id="section5">
+			<h2>Light instalation</h2>
+			<h1>Vivid Sydney</h1>
+			<div class="abstract">Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution lighting displays as well as content variations using different materials.</div>
+			<div class="tools"><i class="fa fa-cubes" aria-hidden="true"></i>Java with Processing</div>
+			<div class="button"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
+		</div>
+		<div class="section" id="section6">
+			<h1>About</h1>
+			<!--<img src="imgs/photo.jpg" alt="Smiley face" width="200">
+			<div style="font-family: 'HelveticaNeue-Thin';
+			font-size: 20px;
+			width: 40%;
+			color: #fff1e4;
+			padding-bottom: 15px;"></div>-->
+		</div>
+	</div>
+		<div class="content">
+			<!--<h1 id="test" style="color: black">Light Shifting Display</h1>
+			<h2 style="color: black">Luminaire Design</h2>
+			<h1 id="test" style="color: black">Light Shifting Display</h1>
+			<h2 style="color: black">Luminaire Design</h2>-->
+			<h3>About</h3>
+			<!--<img src="imgs/photo.jpg" alt="Smiley face" width="200" style="float: right; padding-left: 30px; padding-bottom: 30px;">-->
+			<div class="text">Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution.</div>
+			<div class="text">Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution.</div>
+			<div class="text">Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution.</div>
+			<div class="text">Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution. Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution.</div>
+		</div>
+	</div>
+
+</body>
+</html>
