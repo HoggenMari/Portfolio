@@ -46,6 +46,7 @@ html, body {
 }
 .pp-section.pp-table{
     display: table;
+    width: 100vw;
 }
 .pp-tableCell {
     display: table-cell;
@@ -76,7 +77,7 @@ html, body {
     display: block;
     width: 14px;
     height: 13px;
-    margin: 7px;
+    margin-top: 7px;
     position:relative;
 }
 .pp-slidesNav li {

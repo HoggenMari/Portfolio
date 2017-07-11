@@ -192,9 +192,15 @@
             }
 
             if (typeof options.sectionsImage[index] !== 'undefined') {
-                console.log("test");
-                $(this).children(".bcg").css('background-image', options.sectionsImage[index]);
+                //var url = "url("+options.sectionsImage[index]+")";
+                //console.log(url);
+                $(this).children(".bcg").css('background-image:', options.sectionsImage[index]);
                 $(this).children(".bcg").css('background-position', options.sectionsPercent[index]);
+                //var url = options.sectionsImage[index];
+                //url = url.replace('url(','');
+                //url = url.replace(')','');
+                //console.log("Test"+url);
+                //$(this).append('<img src="'+url+'" alt="test">');
             }
 
             if(options.verticalCentered && !$(this).hasClass('pp-scrollable')){
