@@ -14,13 +14,35 @@
         left: 0;
         width: 100%;
         height: 100%;
-    }</style>
+    }
+    .collapse{
+        cursor: pointer;
+        display: block;
+        background: #cdf;
+    }
+    .collapse + input{
+        display: none; /* hide the checkboxes */
+    }
+    .collapse + input + div{
+        display:none;
+    }
+    .collapse + input:checked + div{
+        display:block;
+    }
+    input:checked + div {
+        display: none;
+    }
+
+</style>
 <div class="row">
     <div class="col-sm-12">
         <img src="imgs/photo.jpg" alt="Smiley face" class="my-photo">
-        <div class="text">I'm an interaction designer and researcher working in the field of media architecture and urban informatics. I hold a B.Sc. in Media Informatics from the University of Munich, Germany. In 2016, I was a visiting scholar at the Design Lab at University of Sydney, Australia conducting his master thesis project. Further, I worked on several media architecture installations for public art festivals, including Luminale in Frankfurt and Vivid Sydney.
+        <div class="text" style="padding-bottom: 24px;">I'm a programmer and maker, interaction designer and researcher. I hold a B.Sc. in Media Informatics from the University of Munich, Germany. I gained professional experience in Interface and User Experience Design for the Web, Mobile and Embedded Application Development for the Internet of Things, and Interactive Lighting Design.</div>
+        <div class="text">In 2016, I was a visiting scholar at the Design Lab at University of Sydney (Australia) to conduct my master thesis project. My research interests include the development of prototyping methods and tools for complex design contexts beyond the screen. I am particularly interested in media architecture and urban interaction design. In this conext, I worked on several light installations for public art festivals, including Luminale in Frankfurt and Vivid Sydney.</div>
         </div>
         <ul class="social-network social-circle">
+            <li><a href="https://scholar.google.com/citations?user=DIj55BMAAAAJ&hl=de" class="icoScholar" title="Google Scholar"><i class="ai ai-google-scholar ai-1x"></i></a></li>
+            <li><a href="https://www.researchgate.net/profile/Marius_Hoggenmueller" class="icoRG" title="ResearchGate"><i class="ai ai-researchgate ai-1x"></i></a></li>
             <li><a href="https://twitter.com/hoggenmari" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
             <li><a href="https://de.linkedin.com/in/mariushoggenmueller" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
             <li><a href="https://vimeo.com/user17953051" class="icoVimeo" title="Vimeo"><i class="fa fa-vimeo"></i></a></li>
@@ -28,7 +50,6 @@
         </ul>
         </div>
     </div>
-</div>
 <div class="row">
     <div class="col-sm-12">
         <h3 style="margin-bottom: 18px;">Research Publications</h3>
@@ -57,47 +78,107 @@
             <span class="me">Marius Hoggenmueller</span> and Alexander Wiethoff. 2014. Lightset: enabling urban prototyping of interactive media façades. In <em>Proceedings of the 2014 conference on designing interactive systems</em>, New York, NY, USA, 2014, pp. 925-934.
         </div>
     </div>
-</div>
-<div class="row">
     <div class="col-sm-12">
-        <h3 style="margin-bottom: 18px;">Talks & Exhibitions</h3>
+            <h3 style="margin-bottom: 18px;">Talks & Exhibitions</h3>
+            <ul>
+                <li>
+                    <div class="list_item"><i class="fa fa-circle"></i>
+                        Paper presentation at the <a href="http://pervasivedisplays.org/2017/">6th International Symposium on Pervasive Displays (PerDis'17)</a>, Lugano, Switzerland, June 2017.
+                    </div>
+                </li>
+                <li>
+                    <div class="list_item"><i class="fa fa-circle"></i>
+                        Demo presentation at the <a href="https://tei.acm.org/2017/">11th International Conference on Tangible, Embedded and Embodied Interactions (TEI'17)</a>, Yokohama, Japan, March 2017.
+                    </div>
+                </li>
+                <li>
+                    <div class="list_item"><i class="fa fa-circle"></i>
+                        Speaker at "Design @ Dusk"- talk series by the <a href="https://tei.acm.org/2017/">Design Lab at the Faculty of Architecture, Design and Planning at the University of Sydney</a>, August 2016.
+                    </div>
+                </li>
+                <li>
+                    <div class="list_item"><i class="fa fa-circle"></i>
+                        Paper presentation & panel discussion at the  <a href="http://mab16.org/">Media Architecture Biennale (MAB'16)</a>, Sydney, Australia, June 2016.
+                    </div>
+                </li>
+                <li>
+                    <div class="list_item"><i class="fa fa-circle"></i>
+                        Paper presentation at the  <a href="http://pervasivedisplays.org/2015/">4th International Symposium on Pervasive Displays (PerDis'15)'</a>, Saarbrücken, Germany, June 2015.
+                    </div>
+                </li>
+                <li>
+                    <div class="list_item"><i class="fa fa-circle"></i>
+                        Light installation at the  <a href="http://kultur.knwm.de/content/hybrid-screen-von-marius-hoggenm%C3%BCller">Wedding/Moabit Festival</a>, Berlin, Germany, September 2014.
+                    </div>
+                </li>
+                <li>
+                    <div class="list_item"><i class="fa fa-circle"></i>
+                        Paper presentation at the  <a href="http://dis2014.iat.sfu.ca/">Designing Interactive Systems Conference (DIS'14)</a>, Vancouver, Canada, June 2014.
+                    </div>
+                </li>
+            </ul>
+        </div>
+    <div class="col-sm-12">
+        <h3 style="margin-bottom: 18px;">Workshops</h3>
         <ul>
             <li>
                 <div class="list_item"><i class="fa fa-circle"></i>
-                    Paper presentation at the <a href="http://pervasivedisplays.org/2017/">6th International Symposium on Pervasive Displays (PerDis'17)</a>, Lugano, Switzerland, June 2017.
+                    Workshop organizer <a href="https://digitalparticipationhci.wordpress.com/designing-participation-for-the-digital-fringe/">Designing Participation for the Digital Fringe</a> at the <a href="http://comtech.community/">8th International Conference on Communities and Technologies</a>, Troyes, France, June 2017.
                 </div>
             </li>
             <li>
                 <div class="list_item"><i class="fa fa-circle"></i>
-                    Demo presentation at the <a href="https://tei.acm.org/2017/">11th International Conference on Tangible, Embedded and Embodied Interactions (TEI'17)</a>, Yokohama, Japan, March 2017.
+                    Workshop organizer <a href="http://mab16.org/pages/workshops_guide.php#urban-prototyping-and-diy-media-architecture">Urban Prototyping and DIY Media Architecture</a> at the <a href="http://mab16.org/">Media Architecture Biennale</a>, Sydney, Australia, June 2016.
                 </div>
             </li>
             <li>
                 <div class="list_item"><i class="fa fa-circle"></i>
-                    Speaker at "Design @ Dusk"- talk series by the <a href="https://tei.acm.org/2017/">Design Lab at the Faculty of Architecture, Design and Planning at the University of Sydney</a>, August 2016.
+                    Workshop organizer <a href="http://mab14.mediaarchitecture.org/workshops-c/interactive-urban-architecture/">Interactive Urban Architecture</a> at the <a href="http://mab14.mediaarchitecture.org/">Media Architecture Biennale</a>, Aarhus, Denmark, November 2014.
                 </div>
             </li>
             <li>
                 <div class="list_item"><i class="fa fa-circle"></i>
-                    Paper presentation & panel discussion at the  <a href="http://mab16.org/">Media Architecture Biennale (MAB'16)</a>, Sydney, Australia, June 2016.
+                    Workshop organizer <a href="http://kultur.knwm.de/content/workshop-prototyping-interactivity-media-facades-von-dr-alexander-wiethoff-marius">Prototyping Interactivity with Media Facades / Connecting Cities</a> at the <a href="http://connectingcities.net/">Connecting Cities: Urban Reflections</a>, Berlin, Germany, September 2014.
                 </div>
             </li>
             <li>
                 <div class="list_item"><i class="fa fa-circle"></i>
-                    Paper presentation at the  <a href="http://pervasivedisplays.org/2015/">4th International Symposium on Pervasive Displays (PerDis'15)'</a>, Saarbrücken, Germany, June 2015.
-                </div>
-            </li>
-            <li>
-                <div class="list_item"><i class="fa fa-circle"></i>
-                    Light installation at the  <a href="http://kultur.knwm.de/content/hybrid-screen-von-marius-hoggenm%C3%BCller">Wedding/Moabit Festival</a>, Berlin, Germany, September 2014.
-                </div>
-            </li>
-            <li>
-                <div class="list_item"><i class="fa fa-circle"></i>
-                    Paper presentation at the  <a href="http://dis2014.iat.sfu.ca/">Designing Interactive Systems Conference (DIS'14)</a>, Vancouver, Canada, June 2014.
+                    Workshop organizer <a href="http://www.mediaarchitecture.org/mfs14/#workshops">Urban Prototyping and HCI</a> at the <a href="http://www.mediaarchitecture.org/mfs14/">Media Facades Summit 2014</a>, Frankfurt, Germany, April 2014.
                 </div>
             </li>
         </ul>
     </div>
 </div>
+</div>
+    <div style="background-color: lightgrey;" class="row">
+        <div class="col-sm-12">
+            <label for=cb style="font-weight: bold; padding-top: 10px;" class="text">Imprint</label>
+            <input type='checkbox' style='display: none' id=cb checked="checked"/>
+            <div>
+                <h3 style="margin-bottom: 18px;">Impressum</h3>
+                <div style="font-weight: bold" class="text">Angaben gemäß § 5 TMG:<div>
+                <div class="text">Marius Hoggenmüller<br>
+               Erwinstraße 97<br>
+               79102 Freiburg
+                </div>
+                <div style="font-weight: bold" class="text">Contact:<div>
+                <div class="text">E-Mail: m.hoggenmueller@gmail.com</div>
+                <div class="text">Quelle: http://www.e-recht24.de</div>
+                <div style="font-weight: bold" class="text">Haftungsausschuss (Disclaimer)<div>
+                <div class="text">
+                <br><em>Haftung für Inhalte</em><br>
+
+                Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.<br><br>
+
+                <em>Haftung für Links</em><br>
+
+                Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.<br><br>
+
+                <em>Urheberrecht</em><br>
+
+                Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.<br><br>
+                </div>
+            </div>
+         </div>
+    </div>
 </div>

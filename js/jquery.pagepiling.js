@@ -102,6 +102,8 @@
         * Moves sectio up
         */
         PP.moveSectionUp = function () {
+
+            //console.log("up");
             var prev = $('.pp-section.active').prev('.pp-section');
 
             //looping to the bottom if there's no more sections above
@@ -134,6 +136,9 @@
         * Moves the site to the given anchor or index
         */
         PP.moveTo = function (section){
+
+            //console.log("moveTo given anc");
+
             var destiny = '';
 
             if(isNaN(section)){
@@ -226,7 +231,7 @@
         * Enables vertical centering by wrapping the content and the use of table and table-cell
         */
         function addTableClass(element, index){
-            console.log(element);
+            //console.log(element);
             element.addClass('pp-table').wrapInner('<div class="pp-tableCell" style="height:100%" />');
             element.prepend("<div class='bcg' style='transform: matrix(1, 0, 0, 1, 0, 0); background-image: "+options.sectionsImage[index]+"; background-position: 50% center;'></div>");
         }
@@ -269,6 +274,7 @@
             }
 
             if(typeof v.anchorLink !== 'undefined'){
+                //console.log("anchorlink undefined");
                 setURLHash(v.anchorLink, v.sectionIndex);
             }
 
@@ -276,15 +282,25 @@
 
             v.sectionsToMove = getSectionsToMove(v);
 
+            //console.log(getSectionsToMove(v));
+
             //scrolling down (moving sections up making them disappear)
             if (v.yMovement === 'down') {
                 v.translate3d = getTranslate3d();
                 v.scrolling = '-100%';
 
+                //console.log("vertical scrolling");
+
                 if(!options.css3){
                     v.sectionsToMove.each(function(index){
-                        if(index != v.activeSection.index('.pp-section')){
-                            $(this).css(getScrollProp(v.scrolling));
+                        if(index==0){
+                            if(index != v.activeSection.index('.pp-section')){
+                                $(this).css(getScrollPropDirection(v.scrolling, "vertical"));
+                            }
+                        }else if(index>0 && index <6){
+                            if(index != v.activeSection.index('.pp-section')){
+                                $(this).css(getScrollPropDirection(v.scrolling, "horizontal"));
+                            }
                         }
                     });
                 }
@@ -302,7 +318,11 @@
 
             $.isFunction(options.onLeave) && options.onLeave.call(this, v.leavingSection, (v.sectionIndex + 1), v.yMovement);
 
-            performMovement(v);
+            if (v.yMovement === 'down') {
+                performMovement(v, "down");
+            }else{
+                performMovement(v, "up");
+            }
 
             activateMenuElement(v.anchorLink);
             activateNavDots(v.anchorLink, v.sectionIndex);
@@ -315,13 +335,39 @@
         /**
         * Performs the movement (by CSS3 or by jQuery)
         */
-        function performMovement(v){
+        function performMovement(v, m){
             if(options.css3){
+                //console.log("css3");
                 transformContainer(v.animateSection, v.translate3d, v.animated);
 
-                v.sectionsToMove.each(function(){
-                    transformContainer($(this), v.translate3d, v.animated);
-                });
+                if(m=="down") {
+                    v.sectionsToMove.each(function (index) {
+                        //console.log("index"+index);
+                        if (index == 0) {
+                            transformContainer($(this), 'translate3d(0px, -100%, 0px)', v.animated);
+                        } else if(index == 5) {
+                            transformContainer($(this), 'translate3d(0px, 0px, 0px)', v.animated);
+                            $(this).animate({opacity:"0"}, 400);
+                        } else {
+                            transformContainer($(this), 'translate3d(-100%, 0px, 0px)', v.animated);
+                        }
+                    });
+                }else{
+                    v.sectionsToMove.each(function (index) {
+                        //console.log("index"+index);
+                        if (index == 1) {
+                            $(this).animate({opacity:"1"}, 200);
+                            transformContainer($(this), v.translate3d, v.animated);
+                        } else if(index == 0) {
+                            //transformContainer($(this), 'translate3d(0px, -100%, 0px)', v.animated);
+                            $(this).animate({opacity:"1"}, 200);
+                            transformContainer($(this), v.translate3d, v.animated);
+                        } else {
+                            $(this).animate({opacity:"1"}, 200);
+                            transformContainer($(this), v.translate3d, v.animated);
+                        }
+                    });
+                }
 
                 setTimeout(function () {
                     afterSectionLoads(v);
@@ -355,6 +401,7 @@
         }
 
 
+
         function getSectionsToMove(v){
             var sectionToMove;
 
@@ -366,7 +413,7 @@
                 });
             }else{
                 sectionToMove = $('.pp-section').map(function(index){
-                    if (index > v.destination.index('.pp-section')){
+                    if (index > v.destination.index('.pp-section') - 1){
                         return $(this);
                     }
                 });
@@ -374,6 +421,33 @@
 
             return sectionToMove;
         }
+
+
+
+        /*function getSectionsToMove(v){
+            var sectionToMove;
+
+            if(v.yMovement === 'down'){
+                sectionToMove = $('.pp-section').map(function(index){
+                    console.log("Test"+v.activeSection.index('.pp-section'));
+                    //if (index > 0 && index < 4 && index < v.destination.index('.pp-section')){
+                    if(index == v.activeSection.index('.pp-section')) {
+                        return $(this);
+                    }
+                    //}
+                });
+            }else{
+                sectionToMove = $('.pp-section').map(function(index){
+                    //if (index > 0 && index < 4 && index > v.destination.index('.pp-section')){
+                    if(index == v.activeSection.index('.pp-section')) {
+                        return $(this);
+                    }
+                    //}
+                });
+            }
+
+            return sectionToMove;
+        }*/
 
         /**
         * Returns the sections to re-adjust in the background after the section loads.
@@ -396,6 +470,20 @@
             }
             return {'left': propertyValue};
         }
+
+        /**
+         * Gets the property used to create the scrolling effect when using jQuery animations
+         * depending on the plugin direction option.
+         */
+        function getScrollPropDirection(propertyValue, direction){
+            //console.log("vertical");
+
+            if(direction === 'vertical'){
+                return {'top': propertyValue};
+            }
+            return {'left': propertyValue};
+        }
+
 
         /**
         * Scrolls the site without anymations (usually used in the background without the user noticing it)
@@ -891,7 +979,11 @@
                     }
                 }
 
-                nav.find('ul').append('<li data-tooltip="' + tooltip + '"><a href="#' + link + '"><span></span></a></li>');
+                if(cont>0 && cont < $('.pp-section').length-1) {
+                    nav.find('ul').append('<li data-tooltip="' + tooltip + '"><a href="#' + link + '"><span></span></a></li>');
+                }else {
+                    nav.find('ul').append('<li style="display: none" data-tooltip="' + tooltip + '"><a href="#' + link + '"><span></span></a></li>');
+                }
             }
 
             nav.find('span').css('border-color', options.navigation.bulletsColor);
@@ -940,13 +1032,26 @@
          * Activating the website main menu elements according to the given slide name.
          */
         function activateMenuElement(name){
+
+            //$('.header-top h1').css('text-decoration','none');
+
+           /* if(name=="intro"){
+                console.log(name);
+                $('#header_name').css('text-decoration','underline');
+            }else if(name!="intro" && name!="about"){
+                $('#header_portfolio').css('text-decoration','underline');
+            }else if(name=="about"){
+                $('#header_about').css('text-decoration','underline');
+            }*/
+
             if(options.menu){
                 $(options.menu).find('.active').removeClass('active');
                 $(options.menu).find('[data-menuanchor="'+name+'"]').addClass('active');
             }
         }
 
-        /**
+
+            /**
         * Checks for translate3d support
         * @return boolean
         * http://stackoverflow.com/questions/5661671/detecting-transform-translate3d-support
@@ -982,11 +1087,27 @@
         */
         function getTranslate3d(){
             if (options.direction !== 'vertical') {
-                  return 'translate3d(-100%, 0px, 0px)';
+                var index = $('.pp-section.active').index('.pp-section');
+                //console.log("getTranslate3d"+index);
+                if(index>0 && index<6) {
+                    return 'translate3d(-100%, 0px, 0px)';
+                }else if (index==6) {
+                    return 'translate3d(0px, 0px, 0px)';
+                }else {
+                    return 'translate3d(0px, -100%, 0px)';
+                }
+            }
+
+            //return 'translate3d(0px, -100%, 0px)';
+        }
+
+        /*function getTranslate3d(){
+            if (options.direction !== 'vertical') {
+                return 'translate3d(-100%, 0px, 0px)';
             }
 
             return 'translate3d(0px, -100%, 0px)';
-        }
+        }*/
 
     };
 })(jQuery, document, window);

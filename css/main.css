@@ -60,6 +60,9 @@ h1{
 	font-weight: 300;
 	font-size: 6em;
 }
+h4{
+	color: rgba(0,0,0,0.8);
+}
 p{
 	font-size: 48px;
 	color: rgb(255, 255, 255);
@@ -378,8 +381,10 @@ h2 {
 }
 
 h3 {
-	line-height: 48px;
-	height: 48px;
+	/*line-height: 48px;
+	height: 48px;*/
+	padding-top: 24px;
+	padding-bottom: 24px;
 	font-size: 24px;
 	color: rgba(0,0,0,0.8);
 	font-family: 'HelveticaNeue', 'Open Sans';
@@ -404,6 +409,7 @@ h1 a {
 	display: inline-block;
 	position: relative;
 	top: 10px;
+	display: none;
 }
 
 .toggle-menu i {
@@ -567,7 +573,7 @@ h1.l-left > a {
 	font-size: 20px;
 	line-height: 30px;
 	width: 100%;
-	padding-bottom: 32px;
+	/*padding-bottom: 32px;*/
 }
 
 .list_item {
@@ -672,20 +678,98 @@ h1.l-left > a {
 }
 
 #home .pp-tableCell {
-	vertical-align: top;
+	vertical-align: middle;
 }
 
 .title {
-	width: 45%;
-	padding-top: 20vh;
 }
 
 .title h1 {
-	font-family: serif;
+	width: 45%;
 	font-size: 2.5vw;
+	font-family: 'Radley';
 }
 
-@media (max-width: 450px), (max-height: 450px) {
+.title h2 {
+	width: 40%;
+	padding-top: 40px;
+	font-size: 1.8vw;
+	font-family: 'HelveticaNeue-Thin','Open Sans', Calibri, Arial, sans-serif;
+	font-weight: 300;
+}
+
+#pp-nav {
+	/*display: none;*/
+}
+
+#desktop_menu {
+	display: block;
+	padding-right: 10px;
+}
+
+#mobile_menu {
+	display: none;
+}
+
+.mobile_navigation {
+	display: none;
+	background-color: rgba(0,0,0,0.9);
+	width: 100vw;
+	height: 100vh;
+	z-index: 10;
+	position: absolute;
+	font-size: 36px;
+	padding: 50px;
+	padding-top: 80px;
+}
+
+.mobile_item {
+	position: relative;
+	color: white;
+	text-align: center;
+}
+
+.fa-hand-pointer-o {
+	display:none;
+}
+
+.footer {
+	position: absolute;
+	right: 0;
+	bottom: 0px;
+	left: 0;
+	margin-bottom: -180px;
+	padding: 3rem;
+	background-color: #efefef;
+	text-align: center;
+}
+
+.footer a {
+	color: rgba(0,0,0,0.8);
+	padding-left: 10px;
+}
+
+.col-sm-12, .col-sm-6 {
+	padding-bottom: 24px;
+}
+
+@media (max-width: 650px), (max-height: 450px) {
+
+.fa-hand-pointer-o {
+	animation-name: scroll;
+	animation-duration: 2.2s;
+	animation-timing-function: cubic-bezier(.15,.41,.69,.94);
+	animation-iteration-count: infinite;
+	display: block;
+}
+
+.desktop_menu {
+	display: none;
+}
+
+.header_name {
+	text-decoration: none;
+}
 
 h1 {
 	/*line-height: 32px;
@@ -704,13 +788,23 @@ h1.l-left > a {
 }
 
 .title {
-	width: 100%;
+	width: 95%;
 }
 
 .title h1 {
-	font-family: serif;
+	width: 100%;
 	font-size: 24px;
 	text-align: center;
+}
+
+.title h2 {
+	width: 90%;
+	font-size: 2.8vh;
+	text-align: center;
+	line-height: 1.1;
+	position: absolute;
+	bottom: 120px;
+	padding-top: 0px;
 }
 
 .tlt{
@@ -796,6 +890,22 @@ h2 {
 	width: 70vw;
 }
 
+.toggle-menu {
+	display: block;
+}
+
+#desktop_menu {
+	display: none;
+}
+
+#mobile_menu {
+	display: block;
+}
+
+img {
+	width: 100%;
+}
+
 }
 
 /*@media not all and (min-resolution:.001dpcm) { @media {
@@ -824,6 +934,7 @@ ul.social-network {
 	margin-left:0 !important;
 	padding: 0;
 	float: right;
+	padding-top: 24px;
 }
 ul.social-network li {
 	display: inline;
@@ -836,7 +947,7 @@ ul.social-network li {
 	background-color: #F56505;
 }
 .social-network a.icoEmail:hover {
-	background-color: rgba(53, 137, 67, 0.73);
+	background-color:#BD3518;
 }
 .social-network a.icoFacebook:hover {
 	background-color:#3B5998;
@@ -853,8 +964,14 @@ ul.social-network li {
 .social-network a.icoLinkedin:hover {
 	background-color:#007bb7;
 }
+.social-network a.icoScholar:hover {
+	background-color: rgba(96, 94, 93, 0.85);
+}
+.social-network a.icoRG:hover {
+	background-color: rgba(53, 137, 67, 0.73);
+}
 .social-network a.icoRss:hover i, .social-network a.icoRss:hover i, .social-network a.icoFacebook:hover i, .social-network a.icoTwitter:hover i,
-.social-network a.icoGoogle:hover i, .social-network a.icoVimeo:hover i, .social-network a.icoLinkedin:hover i {
+.social-network a.icoGoogle:hover i, .social-network a.icoVimeo:hover i, .social-network a.icoLinkedin:hover i, .social-network a.icoScholar:hover i, .social-network a.RG:hover i {
 	color:#fff;
 }
 a.socialIcon:hover, .socialHoverClass {
@@ -864,7 +981,7 @@ a.socialIcon:hover, .socialHoverClass {
 .social-circle li a {
 	display:inline-block;
 	position:relative;
-	margin:0 auto 0 auto;
+	margin:0 auto 20px auto;
 	-moz-border-radius:50%;
 	-webkit-border-radius:50%;
 	border-radius:50%;

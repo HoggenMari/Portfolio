@@ -37,27 +37,77 @@
 
 	<script src="js/velocity.min.js"></script>
 	<script src="js/bowser/src/bowser.js"></script>
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
+		ga('create', 'UA-102751743-1', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+	<link rel="stylesheet" href="https://cdn.rawgit.com/balzss/luxbar/ae5835e2/build/luxbar.min.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css" />
+	<link rel="stylesheet" type="text/css" href="css/academicons.min.css" />
+
 
 	<script type="text/javascript">
 
 		$(document).ready(function() {
 
 			var on = false;
+			var menu = false;
+			var about = false;
 
 			var urls = ['/shifting.html','/sketching.html','/lightbricks.html','orchestra.html','vivid.html','about.html'];
 
-			//var videos = [null, 'https://player.vimeo.com/video/136714821', 'https://player.vimeo.com/video/136714821', null, null, null];
-
 			var character_count = $('.animated-text').text().length;
 
-			/*$(function () {
-				$('.tlt').textillate();
-			})*/
+			var anchors = ['intro','lightshifting', 'sketching', 'lightbricks', 'orchestra', 'vivid', 'about'];
 
-			//alert(bowser.name);
+			$(window).scroll(function() {
+				var height = $(window).scrollTop();
+				var url = ""+window.location;
 
+				if(url.indexOf("about") != -1) {
+
+					if(height > $(window).height()*0.8){
+						$('.header-top').css('opacity','0');
+						//console.log("scroll "+height+" "+$(window).height()+" "+window.location);
+					}else{
+						$('.header-top').css('opacity','1');
+					}
+					if(height  < $(window).height()/2 && about) {
+						$('.header-top').css('opacity','1');
+						//console.log("scroll "+height+" "+$(window).height()+" "+window.location);
+						about = false;
+						$.fn.pagepiling.moveSectionUp();
+
+					}
+				}
+			});
+
+			$('.luxbar-item').click(function(event) {
+				menu = !menu;
+				$('#luxbar-checkbox').prop('checked', false);
+				if(menu){
+					$('.luxbar-menu').css('background-color','rgba(0,0,0,0.6)');
+				}else{
+					$('.luxbar-menu').css('background-color','rgba(0,0,0,0)');
+				}
+			});
+
+			$('.luxbar-hamburger').click(function(event) {
+				//console.log("menu click");
+				menu = !menu;
+				if(menu){
+					$('.luxbar-menu').css('background-color','rgba(0,0,0,0.6)');
+				}else{
+					$('.luxbar-menu').css('background-color','rgba(0,0,0,0)');
+				}
+			});
 
 			/*
 			* Plugin intialization
@@ -65,20 +115,23 @@
 	    	$('#pagepiling').pagepiling({
 	          	direction: 'horizontal',
 	    		menu: '#menu',
-	    		anchors: ['intro','lightshifting', 'sketching', 'lightbricks', 'orchestra', 'vivid', 'about'],
+	    		anchors: anchors,
 			    sectionsColor: ['black', 'black', 'black', 'black', 'black', 'black', 'black'],
 				sectionsImage: ['url(imgs/about.jpg)','url(imgs/light_shifting_display.jpg)','url(imgs/sketching.jpg)','url(imgs/lightbricks.jpg)','url(imgs/orchestra.jpg)','url(imgs/vivid.jpg)','url(imgs/about.jpg)'],
 				sectionsPercent: ['50%','50%','30%','30%','30%','30%','50%'],
-				/*navigation: {
-			    	'position': 'right',
-			   		'tooltips': ['Page 1', 'Page 2', 'Page 3', 'Pgae 4']
-			   	},*/
+
 			    afterRender: function(){
 			    	$('#pp-nav').addClass('custom');
 
 					$('.pp-tableCell img').css('display','none');
 
-					console.log("after pagepilling");
+					$('#header_about').append("<a href=#"+anchors[anchors.length-1]+">About</a>");
+					$('#header_portfolio').append("<a href=#"+anchors[1]+">Portfolio</a>");
+					$('#header_name').css('text-decoration','underline');
+
+					$('#pp-nav').css('opacity','0');
+
+					//console.log("after pagepilling");
 
 					// Init ScrollMagic
 					var controller = new ScrollMagic.Controller();
@@ -107,13 +160,11 @@
 
 					introTl
 							.to($('.abstract, .tools'), 0.4, {autoAlpha: 0, ease:Power1.easeNone})
-							//.to($('.headers'), 0.8, {y: '30%', ease:Power1.easeOut}, '-=0.2')
 							.to($('.section .bcg'), 1.4, {y: '40%', ease:Power1.easeOut}, '-=0.4')
-							//.to($('h2, h1'), 5.4, {y: '10%', ease:Power1.easeOut}, '-=0.2')
 							.to($('.section .bcg'), 0.7, {autoAlpha: 0.5, ease:Power1.easeNone}, '-=1.4');
 
 					var introScene = new ScrollMagic.Scene({
-						triggerElement: '#pagepiling',
+						triggerElement: '#intro',
 						triggerHook: 0,
 						duration: "100%"
 					})
@@ -121,10 +172,35 @@
 							.addTo(controller);
 			    },
 				onLeave: function(index, nextIndex, direction){
-			    	console.log("LEAVE");
-
+			    	//console.log("leave"+index+" "+nextIndex);
+					if(index==1){
+						$('.fa-hand-pointer-o').css('display','none');
+					}
+			    	if(index==7){
+						$('.content').empty();
+						about = false;
+					}
+			    	if(nextIndex==1 && direction=="up"){
+						$('#pp-nav').animate({opacity:"0"}, 400);
+					}else if(nextIndex==7 && direction=="down"){
+						$('#pp-nav').animate({opacity:"0"}, 400);
+					}
 				},
 			    afterLoad: function(anchorLink, index){
+
+					//console.log("afterload: "+index);
+
+					if(index==1){
+						$('.fa-hand-pointer-o').css('display','block');
+					}
+					if(index>1 && index<7){
+						$('#pp-nav').animate({opacity:"1"}, 400);
+					}
+
+					if(index!= 7){
+						about = false;
+					}
+
 			    	if(index>1){
 			    		$('#pp-nav').removeClass('custom');
 			    	}else{
@@ -132,25 +208,22 @@
 			    	}
 					if(anchorLink == "about"){
 
-						$('.header-top').addClass('about');
-
-						$('#wrapper').css('position', 'absolute');
-
-						$('html, body').animate({
-							scrollTop:$('h2').offset().top
-						},'slow', function(){
-							console.log(anchorLink);
-							$('body').css('overflow', 'auto');
-							$('html').css('overflow', 'auto');
-						});
-
 						$('.content').load(urls[index-2], function(){
 
-							console.log(index-2);
+							$('#wrapper').css('position', 'absolute');
+							$('.mousey').animate({opacity:"0"}, 400);
+							$('html, body').animate({
+								scrollTop:$('.headers h1').offset().top
+							},'slow', function(){
+								//console.log(anchorLink);
+								$('body').css('overflow', 'auto');
+								$('html').css('overflow', 'auto');
+								about = true;
+							});
 
 						});
 
-					}else{
+					} else {
 						$('.header-top').removeClass('about');
 
 						$('body').css('overflow', 'hidden');
@@ -158,60 +231,79 @@
 
 						$('#wrapper').css('position', 'fixed');
 					};
+
+					$('h1').css('text-decoration','none');
+
+					if(anchorLink=="intro"){
+						$('#header_name').css('text-decoration','underline');
+					}else if(anchorLink!="intro" && anchorLink!="about"){
+						$('#header_portfolio').css('text-decoration','underline');
+					}else if(anchorLink=="about"){
+						$('#header_about').css('text-decoration','underline');
+					}
+
 			    }
 			}, function(){
 
-
-
-
 			});
+
+			$('.luxbar-hamburger').click(function(){
+				//console.log("luxbar menu");
+			});
+
+			$('.luxbar-item').click(function(){
+				//console.log($(this));
+			});
+
+			$('.toggle-menu').click(function(){
+				menu = true;
+				$('.mobile_navigation').css('display','block');
+				$('#menu').css('display','none');
+				$('.header-top').append("<a class='l-right close'><i class='fa fa-times' aria-hidden='true'></i></a>");
+			});
+
+			$('.close').click(function(){
+				$('.menu').css('display','none');
+				$('#menu').css('display','block');
+				$('.header-top').removeClass('open');
+
+			})
 
 			$('.button').click(function(){
 
 				var index = $( ".button" ).index( this );
-				console.log(index);
+				$('#luxbar').css('display','none');
+				//console.log(index);
 
 				function doSomethingWithData(data) {
-					//alert(data);
-
-					//$(data).find('iframe').remove();
-					//var result = $(data).html()
-
 
 					var teaser = $(data).clone();
 					var iframe = $(data).find("iframe");
 
-					console.log(iframe);
+					//console.log(iframe);
 
 					teaser = $.trim($("iframe",teaser).remove().end().html());
 
-
-					//var test = $(data).remove('iframe');
-					//console.log(teaser);
-
 					$('.content').append(teaser);
-
-					//$('content').append(data)
 
 					$('body').css('overflow', 'auto');
 					$('html').css('overflow', 'auto');
 
 					$('#wrapper').css('position', 'absolute');
 
-					//$('#pp-nav').animate({opacity:"0"}, 400);
-
 					$('.button').animate({opacity: "0"}, 1, function(){
 						$('.button').css('display', 'none');
 					});
 
+					$('#pp-nav').animate({opacity:"0"}, 400);
+					$('.mousey').animate({opacity:"0"}, 400);
+
 					$('.header-top').addClass('open');
-					$('a').remove('.toggle-menu');
+					$('#menu').css('display', 'none');
 					$('.header-top').append("<a class='l-right close'><i class='fa fa-times' aria-hidden='true'></i></a>");
 
-					//console.log($(this).find('.headers h2').offset());
-
 					$('html, body').animate({
-						scrollTop:$('h2').offset().top
+						scrollTop:$('.headers h2').offset().top -70
 					},'slow', function(){
 						$('.embed-container').append(iframe);
 					});
@@ -219,61 +311,20 @@
 					$.fn.pagepiling.setAllowScrolling(false);
 				}
 
-
 				var content;
 				$.get(urls[index], doSomethingWithData);
 
-				// Do something with content:
-				//console.log(content);
-
-				/*$('.content').load(urls[index], function() {
-					//$('.content').css("opacity","0");
-					//$('.content').animate({opcaity:"0"}, 0).animate({opacity:"100"},400);
-
-					//delay(1);
-
-					$('body').css('overflow', 'auto');
-					$('html').css('overflow', 'auto');
-
-					$('#wrapper').css('position', 'absolute');
-
-					//$('#pp-nav').animate({opacity:"0"}, 400);
-
-					$('.button').animate({opacity: "0"}, 1, function(){
-						$('.button').css('display', 'none');
-					});
-
-					$('.header-top').addClass('open');
-					$('a').remove('.toggle-menu');
-					$('.header-top').append("<a class='l-right close'><i class='fa fa-times' aria-hidden='true'></i></a>");
-
-					$('html, body').animate({
-						scrollTop:$('h2').offset().top - 70
-					},'slow', function(){
-						$('.embed-container').append("<iframe src='"+"' width='640' height='360' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>");
-					});
-
-					$.fn.pagepiling.setAllowScrolling(false);
-
-				});*/
-
-				/*$.ajax({
-					crossOrigin: true,
-					url: "/shifting.html",
-					success: function(data) {
-						$( '.content' ).html(data);
-					}
-				});*/
 
 			});
 
 			$('.header-top').on('click', '.close', function(){
-				console.log("close1");
+				//console.log("close1");
+				$('#luxbar').css('display','block');
 
 				$('.content').empty();
 				$('.header-top').removeClass('open');
 				$('a').remove('.close');
-				$('.header-top').append("<a class='l-right toggle-menu' href='#'><i></i><i></i><i></i></a>");
+				$('#menu').css('display', 'block');
 				$('.button').css('display', 'table-cell');
 				$('.button').css('opacity', '1.0');
 				$('.abstract').css('opacity', '1.0');
@@ -281,7 +332,8 @@
 				$('.bcg').css('transform', 'translate(0%, 0%)');
 				$('.bcg').css('opacity', '1.0');
 
-				//$('html, body').css('scrollTop', '0');
+				$('#pp-nav').css('opacity','1');
+				$('.mousey').css('opacity','1');
 
 				$('body').css('overflow', 'hidden');
 				$('html').css('overflow', 'hidden');
@@ -296,18 +348,9 @@
 
 			if(bowser.mobile==true && bowser.safari==true){
 
-				//$('.pp-tableCell').css('padding-bottom', '80px');
-
-				//$('.button').css('margin-bottom', '65px');
-
-				//$('.bcg').css('margin-top', '-65px');
-
-
 				var height = $(window).height() - 0;
 
 				$('.pp-section').css('height', height);
-
-				//$('.row').css('margin-top', '-65px');
 
 			}
 
@@ -336,13 +379,6 @@
 
     <style>
 
-	/*body,html  {
-		background-color: #000;
-		width: 100%;
-		min-height: 100%;
-		padding: 0;
-		margin: 0;
-	}*/
 	.scroll-downs {
 		z-index: 9999;
 		position: absolute;
@@ -361,6 +397,8 @@
 		border: 2px solid #fff;
 		border-radius: 25px;
 		opacity: 0.75;
+		-webkit-box-sizing: initial;
+		box-sizing: initial;
 	}
 	.scroller {
 		width: 3px;
@@ -408,96 +446,118 @@
 		color: #AAA;
 	}
 
+	.luxbar-item {
+		font-size: 32px;
+		text-align: center;
+	}
+
 </style>
 
 </head>
 <body>
     <header>
 	  <div class="header-top clearfix">
-		<h1 class="l-left"><a href="#firstSection">Marius Hoggenmüller</a></h1>
-		<a class="l-right toggle-menu" href="#">
-			<i></i>
-			<i></i>
-			<i></i>
-		</a>
+		<h1 id="header_name" class="l-left"><a href="#intro">Marius Hoggenmüller</a></h1>
+		<div id="menu">
+			<div id="desktop_menu">
+				<h1 id="header_about" style="float: right" class="l-left"></h1>
+				<h1 id="header_portfolio" style="float: right" class="l-left"></h1>
+			</div>
+		</div>
 	  </div>
 	<header>
+	<div id="mobile_menu">
+		<header id="luxbar" style="box-shadow: none;" class="luxbar-fixed">
+			<input type="checkbox" class="luxbar-checkbox" id="luxbar-checkbox"/>
+			<div style="background-color: rgba(0,0,0,0);" class="luxbar-menu luxbar-menu-right luxbar-menu-dark">
+				<ul class="luxbar-navigation">
+					<li style="padding-top: 10px;" class="luxbar-header">
+						<label style="margin-bottom: 0px;" class="luxbar-hamburger luxbar-hamburger-doublespin"
+							   id="luxbar-hamburger" for="luxbar-checkbox"> <span></span> </label>
+					</li>
+					<li style="background-color: rgba(0,0,0,0);" class="luxbar-item"><a href="#lightshifting">Portfolio</a></li>
+					<li style="background-color: rgba(0,0,0,0);" class="luxbar-item"><a href="#about">About</a></li>
+				</ul>
+			</div>
+	</header>
+	</div>
 
 	<div class="scroll-downs">
 		<div class="mousey">
 			<div class="scroller"></div>
 		</div>
+		<i class="fa fa-hand-pointer-o" aria-hidden="true" style="font-size: 32px; color: white; margin-top: 25px;"></i>
 	</div>
 
 	<div id="wrapper">
 	<div id="pagepiling">
 		<div class="section" id="home">
 			<div class="title">
-				<h1>Hi, my name is Marius. I'm an interaction designer and researcher who loves to work with physical and digital materials.</h1>
-				<h2>Luminaire Design</h2>
+				<h1 style="margin-top: -20vh;">Hi, my name is Marius.</h1>
+				<h1>I'm an interaction designer and researcher who loves to work with physical and digital materials.</h1>
+				<h2>Scroll down to look through my design portfolio, or check my about page to get in touch.</h2>
 			</div>
 			<img src="imgs/about.jpg" alt="Light installation">
-			<!--<div>
-				<h1 class="tlt">Hi, my name is Marius. I'm an interaction designer and researcher who loves to work with physical and digital materials.</h1>
-				<h2>Start scrolling to look at my design portfolio.</h2>
-			</div>-->
 		</div>
 	    <div class="section" id="section1">
 			<div class="headers">
-				<h2>Luminaire Design</h2>
+				<h2>Luminaire Design, Internet of Things</h2>
 				<h1>Light Shifting Display</h1>
 			</div>
-			<div class="abstract">The Light Shifting Display is a transformable lighting display that presents real-time information in an ambient manner, and explores the boundaries between display and luminaire design.</div>
+			<div class="abstract">A transformable lighting display that presents real-time information in an ambient manner, and explores the boundaries between display and luminaire design.</div>
 			<div class="tools"><i class="fa fa-cubes" aria-hidden="true"></i>Java with Processing, Meteor, Raspbian, Arduino</div>
 			<div class="button"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
 			<img src="imgs/light_shifting_display.jpg" alt="Light Shifting Display">
 	    </div>
 	    <div class="section" id="section2">
-			<h2>Prototyping Tool</h2>
-			<h1>Sketching-in-Light</h1>
+			<div class="headers">
+				<h2>Prototyping Tool</h2>
+				<h1>Sketching-in-Light</h1>
+			</div>
 			<div class="abstract">Sketching-in-Light is a novel toolkit to assist with designing and evaluating the characteristics of low resolution lighting displays as well as content variations using different materials.</div>
 			<div class="tools"><i class="fa fa-cubes" aria-hidden="true"></i>iOS (Swift)</div>
 			<div class="button"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
 			<img src="imgs/sketching.jpg" alt="Sketching-In-Light">
 		</div>
 	    <div class="section" id="section3">
-			<h2>Prototyping Tool</h2>
-			<h1>LightBricks</h1>
+			<div class="headers">
+				<h2>Prototyping Tool</h2>
+				<h1>LightBricks</h1>
+			</div>
 			<div class="abstract">LightBricks is intended to build miniature models of low-resolution media facades and pre-test visual content rapidly and at low cost.</div>
 			<div class="tools"><i class="fa fa-cubes" aria-hidden="true"></i>Java with Processing, Arduino</div>
 			<div class="button"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
 			<img src="imgs/lightbricks.jpg" alt="LightBricks">
 		</div>
 		<div class="section" id="section4">
-			<h2>Media Architecture Installation</h2>
-			<h1>Orkhestra</h1>
+			<div class="headers">
+				<h2>Media Architecture Installation</h2>
+				<h1>Orkhestra</h1>
+			</div>
 			<div class="abstract">Orkhestra is an interactive media architecture installation for the public space, striving for the seamlessly integration of architectural forms and digital media.</div>
 			<div class="tools"><i class="fa fa-cubes" aria-hidden="true"></i>Java with Processing</div>
 			<div class="button"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
 			<img src="imgs/orchestra.jpg" alt="Orchestra Luminale Media Architecture Installation">
 		</div>
 		<div class="section" id="section5">
-			<h2>Media Architecture Instalation</h2>
-			<h1>Vivid Sydney</h1>
+			<div class="headers">
+				<h2>Media Architecture Instalation</h2>
+				<h1>Vivid Sydney</h1>
+			</div>
 			<div class="abstract"></div>
 			<div class="tools"><i class="fa fa-cubes" aria-hidden="true"></i>Java with Processing</div>
 			<div class="button"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
 			<img src="imgs/vivid.jpg" alt="Vivid Media Architecture Installation">
 		</div>
 		<div class="section" id="section6">
-			<h1>About</h1>
+			<div class="headers">
+				<h1>About</h1>
+			</div>
 			<img src="imgs/about.jpg" alt="Light installation">
-			<!--<img src="imgs/photo.jpg" alt="Smiley face" width="200">
-			<div style="font-family: 'HelveticaNeue-Thin';
-			font-size: 20px;
-			width: 40%;
-			color: #fff1e4;
-			padding-bottom: 15px;"></div>-->
 		</div>
 	</div>
 		<div class="content">
 		</div>
 	</div>
-
 </body>
 </html>
