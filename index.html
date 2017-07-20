@@ -190,6 +190,8 @@
 
 					//console.log("afterload: "+index);
 
+					close();
+
 					if(index==1){
 						$('.fa-hand-pointer-o').css('display','block');
 					}
@@ -262,14 +264,16 @@
 				$('.header-top').append("<a class='l-right close'><i class='fa fa-times' aria-hidden='true'></i></a>");
 			});
 
-			$('.close').click(function(){
+			/*$('.close').click(function(){
 				$('.menu').css('display','none');
 				$('#menu').css('display','block');
 				$('.header-top').removeClass('open');
 
-			})
+			})*/
 
 			$('.button').click(function(){
+
+				$.fn.pagepiling.setAllowScrolling(false);
 
 				var index = $( ".button" ).index( this );
 				$('#luxbar').css('display','none');
@@ -308,27 +312,41 @@
 						$('.embed-container').append(iframe);
 					});
 
-					$.fn.pagepiling.setAllowScrolling(false);
 				}
 
 				var content;
-				$.get(urls[index], doSomethingWithData);
+				//$.get(urls[index], doSomethingWithData);
+
+				$.ajax({
+					url: urls[index],
+					timeout: 3000,
+					type: 'GET',
+					success: function (data){
+						doSomethingWithData(data);
+					},
+					error: function(data){
+						close();
+						alert('Error');
+					}
+				})
 
 
 			});
 
-			$('.header-top').on('click', '.close', function(){
-				//console.log("close1");
+			function close(){
 				$('#luxbar').css('display','block');
 
 				$('.content').empty();
 				$('.header-top').removeClass('open');
 				$('a').remove('.close');
+				$('.menu').css('display','none');
 				$('#menu').css('display', 'block');
 				$('.button').css('display', 'table-cell');
 				$('.button').css('opacity', '1.0');
 				$('.abstract').css('opacity', '1.0');
 				$('.abstract').css('visibility', 'inherit');
+				$('.tools').css('opacity', '1.0');
+				$('.tools').css('visibility', 'inherit');
 				$('.bcg').css('transform', 'translate(0%, 0%)');
 				$('.bcg').css('opacity', '1.0');
 
@@ -342,7 +360,12 @@
 				$('#pp-nav').css('opacity', '1.0');
 
 				$.fn.pagepiling.setAllowScrolling(true);
+			}
 
+
+			$('.header-top').on('click', '.close', function(){
+				//console.log("close1");
+				close();
 			});
 
 
@@ -364,11 +387,15 @@
 
 			}
 
-			if(bowser.android==true && bowser.mobile==true && bowser.chrome==true){
+			if(bowser.android==true && bowser.chrome==true){
 
 				$('.pp-tableCell').css('padding-bottom', '65px');
 
 				$('.button').css('margin-bottom', '65px');
+
+				//if(bowser.chrome==true) {
+					$('.bcg').css('top', '-50px');
+				//}
 
 			}
 	    });

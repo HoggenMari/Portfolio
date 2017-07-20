@@ -232,7 +232,7 @@
         */
         function addTableClass(element, index){
             //console.log(element);
-            element.addClass('pp-table').wrapInner('<div class="pp-tableCell" style="height:100%" />');
+            element.addClass('pp-table').wrapInner('<div class="pp-tableCell" style="/*height:100%"*/> />');
             element.prepend("<div class='bcg' style='transform: matrix(1, 0, 0, 1, 0, 0); background-image: "+options.sectionsImage[index]+"; background-position: 50% center;'></div>");
         }
 

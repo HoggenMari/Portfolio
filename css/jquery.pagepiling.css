@@ -50,9 +50,9 @@ html, body {
 }
 .pp-tableCell {
     display: table-cell;
-    vertical-align: bottom;
+    /*vertical-align: bottom;*/
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
     padding: 3%;
 }
 .pp-slidesNav{
