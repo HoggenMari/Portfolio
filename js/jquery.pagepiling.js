@@ -299,7 +299,7 @@
                             }
                         }else if(index>0 && index <6){
                             if(index != v.activeSection.index('.pp-section')){
-                                $(this).css(getScrollPropDirection(v.scrolling, "horizontal"));
+                                $(this).css(getScrollPropDirection(v.scrolling, "vertical"));
                             }
                         }
                     });
@@ -1090,6 +1090,7 @@
                 var index = $('.pp-section.active').index('.pp-section');
                 //console.log("getTranslate3d"+index);
                 if(index>0 && index<6) {
+                    //console.log("getTranslate3d"+index);
                     return 'translate3d(-100%, 0px, 0px)';
                 }else if (index==6) {
                     return 'translate3d(0px, 0px, 0px)';

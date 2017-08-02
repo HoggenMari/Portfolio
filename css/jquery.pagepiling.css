@@ -101,8 +101,8 @@ html, body {
 .pp-slidesNav span {
     top: 2px;
     left: 2px;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border: 1px solid #000;
     background: rgba(0, 0, 0, 0);
     border-radius: 50%;

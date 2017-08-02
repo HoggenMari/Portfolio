@@ -87,7 +87,7 @@ p{
 
 /* Menu
  * --------------------------------------- */
-#menu li {
+/*#menu li {
 	display:inline-block;
 	margin: 10px;
 	color: #000;
@@ -126,9 +126,10 @@ p{
 	height: 40px;
 	z-index: 70;
 	width: 100%;
-	padding: 0;
+	padding-left: 4%;
+	padding-top: 30px;
 	margin:0;
-}
+}*/
 
 
 .intro p{
@@ -353,7 +354,7 @@ p{
 
 .header-top {
 	height: 70px;
-	padding: 0 10px;
+	padding: 0 4%;
 	position: fixed;
 	top: 0;
 	width: 100%;
@@ -400,7 +401,10 @@ h3 {
 
 h1 a {
 	display: block;
-	padding: 0 10px;
+}
+
+#desktop_menu h1 {
+	margin-right: 20px;
 }
 
 .toggle-menu {
@@ -522,11 +526,25 @@ body.fp-viewing-fifthSection-1 #menu li:last-child a {
 	float: right;
 }
 
+h1.l-left {
+	line-height: 70px;
+	height: 70px;
+}
+
 h1.l-left > a {
 	color: white;
 	font-size: 18px;
-	line-height: 70px;
-	height: 70px;
+	height: 52px;
+	text-decoration: none;
+}
+
+h1.l-left > a:hover {
+	border-bottom: 3px solid #ffffff;
+	text-decoration: none;
+}
+
+h1.l-left.activeMenuItem > a {
+	border-bottom: 3px solid #ffffff;
 }
 
 .pp-tableCell{
@@ -607,7 +625,7 @@ h1.l-left > a {
 	background-color: white;
 }
 
-.open > h1.l-left > a {
+.open > #menu > #header_name > a {
 	color: #383838;
 }
 
@@ -630,11 +648,11 @@ h1.l-left > a {
 .close {
 	width: 50px;
 	height: 50px;
+	line-height: 70px;
 	display: inline-block;
 	position: relative;
 	font-size: 24px;
 	text-align: center;
-	top: 18px;
 	color: black;
 }
 
@@ -680,6 +698,7 @@ h1.l-left > a {
 
 #home .pp-tableCell {
 	vertical-align: middle;
+	position: relative;
 }
 
 .title {
@@ -705,7 +724,7 @@ h1.l-left > a {
 
 #desktop_menu {
 	display: block;
-	padding-right: 10px;
+	float: right;
 }
 
 #mobile_menu {
@@ -764,7 +783,7 @@ h1.l-left > a {
 	display: block;
 }
 
-.desktop_menu {
+#desktop_menu {
 	display: none;
 }
 
@@ -786,6 +805,7 @@ h1 {
 h1.l-left > a {
 	line-height: 32px;
 	height: 32px;
+	border-bottom: none !important;
 }
 
 .title {

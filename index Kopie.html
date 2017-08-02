@@ -10,9 +10,9 @@
 	<meta name="keywords"  content="interaction design,media architecture,design,research,urban interaction design,lighting design,portfolio" />
 	<meta name="Resource-type" content="Document" />
 
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 	<link rel="stylesheet" type="text/css" href="css/jquery.pagepiling.css" />
 	<link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css" />
@@ -20,26 +20,23 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Radley" rel="stylesheet">
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"></script>
 
 	<script type="text/javascript" src="js/jquery.pagepiling.js"></script>
 
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
 
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/ScrollToPlugin.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/ScrollToPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
 
-	<script type="text/javascript" src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
+	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+	<script src="js/main.js"></script>
 
-	<script type="text/javascript" src="js/velocity.min.js"></script>
-	<script type="text/javascript" src="js/bowser/src/bowser.js"></script>
-	<script type="text/javascript" src="js/jquery.lazy/jquery.lazy.min.js"></script>
-	<script type="text/javascript" src="js/jquery.lazy/plugins/jquery.lazy.vimeo.min.js"></script>
-
+	<script src="js/velocity.min.js"></script>
+	<script src="js/bowser/src/bowser.js"></script>
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -63,7 +60,6 @@
 			var on = false;
 			var menu = false;
 			var about = false;
-			var portfolio = false;
 
 			var urls = ['/shifting.html','/sketching.html','/lightbricks.html','orchestra.html','vivid.html','about.html'];
 
@@ -113,13 +109,6 @@
 				}
 			});
 
-			function initLazy() {
-				$('.lazy').lazy({
-					effect: "fadeIn",
-					effectTime: 1000,
-					threshold: 0
-				});
-			}
 			/*
 			* Plugin intialization
 			*/
@@ -132,21 +121,15 @@
 				sectionsPercent: ['50%','50%','30%','30%','30%','30%','50%'],
 
 			    afterRender: function(){
-
-	          		//console.log("afterRender");
-
 			    	$('#pp-nav').addClass('custom');
 
 					$('.pp-tableCell img').css('display','none');
 
 					$('#header_about').append("<a href=#"+anchors[anchors.length-1]+">About</a>");
 					$('#header_portfolio').append("<a href=#"+anchors[1]+">Portfolio</a>");
+					$('#header_name').css('text-decoration','underline');
 
-					$('#header_name').addClass('activeMenuItem');
-
-					//$('#header_name').addClass('active');
-
-					$('#pp-nav li').css('opacity','0');
+					$('#pp-nav').css('opacity','0');
 
 					//console.log("after pagepilling");
 
@@ -189,9 +172,7 @@
 							.addTo(controller);
 			    },
 				onLeave: function(index, nextIndex, direction){
-
-					//console.log("leave"+index+" "+nextIndex+" "+portfolio);
-
+			    	//console.log("leave"+index+" "+nextIndex);
 					if(index==1){
 						$('.fa-hand-pointer-o').css('display','none');
 					}
@@ -200,38 +181,27 @@
 						about = false;
 					}
 			    	if(nextIndex==1 && direction=="up"){
-						//$('#pp-nav').animate({opacity:"0"}, 400);
-
-						$('#pp-nav li').each(function(i)
-						{
-							$(this).delay($('#pp-nav li').length*100-100*parseInt(i)).animate({opacity:"0.0"}, 300);
-						});
-
+						$('#pp-nav').animate({opacity:"0"}, 400);
 					}else if(nextIndex==7 && direction=="down"){
-						$('#pp-nav li').animate({opacity:"0"}, 400);
+						$('#pp-nav').animate({opacity:"0"}, 400);
 					}
 				},
 			    afterLoad: function(anchorLink, index){
 
 					//console.log("afterload: "+index);
 
-					//close();
+					close();
 
 					if(index==1){
 						$('.fa-hand-pointer-o').css('display','block');
 					}
 					if(index>1 && index<7){
-						//$('#pp-nav').animate({opacity:"1"}, 400);
-						$('#pp-nav li').each(function(i)
-						{
-							$(this).delay(100*parseInt(i)).animate({opacity:"1.0"}, 300);
-						});
+						$('#pp-nav').animate({opacity:"1"}, 400);
 					}
 
 					if(index!= 7){
 						about = false;
 					}
-
 
 			    	if(index>1){
 			    		$('#pp-nav').removeClass('custom');
@@ -239,8 +209,6 @@
 			    		$('#pp-nav').addClass('custom');
 			    	}
 					if(anchorLink == "about"){
-
-						initLazy();
 
 						$('.content').load(urls[index-2], function(){
 
@@ -266,18 +234,14 @@
 						$('#wrapper').css('position', 'fixed');
 					};
 
-					//$('h1').css('text-decoration','none');
-
-					$('#menu h1').removeClass('activeMenuItem');
+					$('h1').css('text-decoration','none');
 
 					if(anchorLink=="intro"){
-						$('#header_name').addClass('activeMenuItem');//.css('text-decoration','underline');
-						//$('#header_portfolio').removeClass('activeMenuItem');
+						$('#header_name').css('text-decoration','underline');
 					}else if(anchorLink!="intro" && anchorLink!="about"){
-						$('#header_portfolio').addClass('activeMenuItem');//.css('text-decoration','underline');
+						$('#header_portfolio').css('text-decoration','underline');
 					}else if(anchorLink=="about"){
-						$('#header_about').addClass('activeMenuItem');//.css('text-decoration','underline');
-						//$('#header_portfolio').removeClass('activeMenuItem');
+						$('#header_about').css('text-decoration','underline');
 					}
 
 			    }
@@ -318,15 +282,13 @@
 				function doSomethingWithData(data) {
 
 					var teaser = $(data).clone();
-					//var iframe = $(data).find("iframe");
+					var iframe = $(data).find("iframe");
 
-					//teaser = $.trim($("iframe",teaser).remove().end().html());
+					//console.log(iframe);
+
+					teaser = $.trim($("iframe",teaser).remove().end().html());
 
 					$('.content').append(teaser);
-
-					if(bowser.ios==true && bowser.safari==true){
-						$('.row').css('margin-top', '-30px');
-					}
 
 					$('body').css('overflow', 'auto');
 					$('html').css('overflow', 'auto');
@@ -341,19 +303,14 @@
 					$('.mousey').animate({opacity:"0"}, 400);
 
 					$('.header-top').addClass('open');
-					$('#header_about').css('display', 'none');
-					$('#header_portfolio').css('display', 'none');
-					$('#menu').append("<a class='l-right close'><i class='fa fa-times' aria-hidden='true'></i></a>");
+					$('#menu').css('display', 'none');
+					$('.header-top').append("<a class='l-right close'><i class='fa fa-times' aria-hidden='true'></i></a>");
 
 					$('html, body').animate({
-						scrollTop:$('.headers h2').offset().top -90
-					}, 700,
-					   'swing',
-					function(){
-						//$('.embed-container').append(iframe);
+						scrollTop:$('.headers h2').offset().top -70
+					},'slow', function(){
+						$('.embed-container').append(iframe);
 					});
-
-					initLazy();
 
 				}
 
@@ -369,7 +326,7 @@
 					},
 					error: function(data){
 						close();
-						//alert('Error');
+						alert('Error');
 					}
 				})
 
@@ -377,17 +334,13 @@
 			});
 
 			function close(){
-
-				//console.log("close");
-
 				$('#luxbar').css('display','block');
 
 				$('.content').empty();
 				$('.header-top').removeClass('open');
 				$('a').remove('.close');
-				//$('.menu').css('display','none');
-				$('#header_about').css('display', 'block');
-				$('#header_portfolio').css('display', 'block');
+				$('.menu').css('display','none');
+				$('#menu').css('display', 'block');
 				$('.button').css('display', 'table-cell');
 				$('.button').css('opacity', '1.0');
 				$('.abstract').css('opacity', '1.0');
@@ -404,7 +357,7 @@
 				$('html').css('overflow', 'hidden');
 
 				$('#wrapper').css('position', 'fixed');
-				$('#pp-nav').animate({opacity:"1"}, 400);
+				$('#pp-nav').css('opacity', '1.0');
 
 				$.fn.pagepiling.setAllowScrolling(true);
 			}
@@ -531,29 +484,30 @@
 <body>
     <header>
 	  <div class="header-top clearfix">
+		<h1 id="header_name" class="l-left"><a href="#intro">Marius Hoggenmüller</a></h1>
 		<div id="menu">
-			<h1 id="header_name" class="l-left"><a href="#intro">Marius Hoggenmüller</a></h1>
 			<div id="desktop_menu">
-				<h1 id="header_portfolio" class="l-left"></h1>
-				<h1 id="header_about" class="l-left"></h1>
-			</div>
-			<div id="mobile_menu">
-				<header id="luxbar" style="box-shadow: none;" class="luxbar-fixed">
-					<input type="checkbox" class="luxbar-checkbox" id="luxbar-checkbox"/>
-					<div style="background-color: rgba(0,0,0,0);" class="luxbar-menu luxbar-menu-right luxbar-menu-dark">
-						<ul class="luxbar-navigation">
-							<li style="padding-top: 10px;" class="luxbar-header">
-								<label style="margin-bottom: 0px;" class="luxbar-hamburger luxbar-hamburger-doublespin"
-									   id="luxbar-hamburger" for="luxbar-checkbox"> <span></span> </label>
-							</li>
-							<li style="background-color: rgba(0,0,0,0);" class="luxbar-item"><a href="#lightshifting">Portfolio</a></li>
-							<li style="background-color: rgba(0,0,0,0);" class="luxbar-item"><a href="#about">About</a></li>
-						</ul>
-					</div>
+				<h1 id="header_about" style="float: right" class="l-left"></h1>
+				<h1 id="header_portfolio" style="float: right" class="l-left"></h1>
 			</div>
 		</div>
 	  </div>
+	<header>
+	<div id="mobile_menu">
+		<header id="luxbar" style="box-shadow: none;" class="luxbar-fixed">
+			<input type="checkbox" class="luxbar-checkbox" id="luxbar-checkbox"/>
+			<div style="background-color: rgba(0,0,0,0);" class="luxbar-menu luxbar-menu-right luxbar-menu-dark">
+				<ul class="luxbar-navigation">
+					<li style="padding-top: 10px;" class="luxbar-header">
+						<label style="margin-bottom: 0px;" class="luxbar-hamburger luxbar-hamburger-doublespin"
+							   id="luxbar-hamburger" for="luxbar-checkbox"> <span></span> </label>
+					</li>
+					<li style="background-color: rgba(0,0,0,0);" class="luxbar-item"><a href="#lightshifting">Portfolio</a></li>
+					<li style="background-color: rgba(0,0,0,0);" class="luxbar-item"><a href="#about">About</a></li>
+				</ul>
+			</div>
 	</header>
+	</div>
 
 	<div class="scroll-downs">
 		<div class="mousey">

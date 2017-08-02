@@ -506,7 +506,9 @@ p {
   nav {
     display: block; }
   .content-block .wrapper {
-    padding: 120px 0; } }
+    padding: 120px 0; }
+}
+
 
 /* ==========================================================================
    Helper classes

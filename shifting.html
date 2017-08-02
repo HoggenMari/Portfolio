@@ -14,7 +14,127 @@
             left: 0;
             width: 100%;
             height: 100%;
-        }</style>
+        }
+        #slides {
+            display:none;
+        }
+    </style>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Varela+Round);
+
+        /*html, body { background: #333 url("https://codepen.io/images/classy_fabric.png"); }*/
+
+        .slides {
+            padding: 0;
+            width: 229px;
+            height: 500px;
+            display: block;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .slides * {
+            user-select: none;
+            -ms-user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        .slides input { display: none; }
+
+        .slide-container { display: block; }
+
+        .slide {
+            top: 0;
+            opacity: 0;
+            width: 229px;
+            height: 470px;
+            display: block;
+            position: absolute;
+
+            transform: scale(0);
+
+            transition: all .0s ease-in-out;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .nav label {
+            width: 200px;
+            height: 100%;
+            display: none;
+            position: absolute;
+
+            opacity: 0;
+            z-index: 9;
+            cursor: pointer;
+
+            transition: opacity .2s;
+
+            color: #FFF;
+            font-size: 156pt;
+            text-align: center;
+            line-height: 380px;
+            font-family: "Varela Round", sans-serif;
+            background-color: rgba(255, 255, 255, .3);
+            text-shadow: 0px 0px 15px rgb(119, 119, 119);
+        }
+
+        .slide:hover + .nav label { opacity: 0.5; }
+
+        .nav label:hover { opacity: 1; }
+
+        .nav .next { right: 0; }
+
+        input:checked + .slide-container  .slide {
+            opacity: 1;
+
+            transform: scale(1);
+
+            transition: opacity 0s ease-in-out;
+        }
+
+        input:checked + .slide-container .nav label { display: block; }
+
+        .nav-dots {
+            width: 100%;
+            bottom: 9px;
+            height: 11px;
+            display: block;
+            position: absolute;
+            text-align: center;
+        }
+
+        .nav-dots .nav-dot {
+            top: -5px;
+            width: 11px;
+            height: 11px;
+            margin: 0 4px;
+            position: relative;
+            border-radius: 100%;
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .nav-dots .nav-dot:hover {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        input#img-1:checked ~ .nav-dots label#img-dot-1,
+        input#img-2:checked ~ .nav-dots label#img-dot-2,
+        input#img-3:checked ~ .nav-dots label#img-dot-3,
+        input#img-4:checked ~ .nav-dots label#img-dot-4,
+        input#img-5:checked ~ .nav-dots label#img-dot-5,
+        input#img-6:checked ~ .nav-dots label#img-dot-6 {
+            background: rgba(0, 0, 0, 0.8);
+        }
+    </style>
     <div class="row">
         <div class="col-sm-12">
             <h3>About</h3>
@@ -23,8 +143,7 @@
         </div>
         <div class="col-sm-12">
             <div class='embed-container'>
-                <iframe src='https://player.vimeo.com/video/199546019' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen>
-                </iframe>
+                <iframe class="lazy" data-loader="vimeo" data-src="199546019" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             </div>
         </div>
         <div class="col-sm-12">
@@ -32,17 +151,61 @@
             <div class="text">Following a human-centered design process, experts and end-users were involved during the concept development phase. Therefore, the purpose-built prototyping toolkit Sketching-in-Light was used as a creative enabler during several co-design activities. In this sessions, workshop participants created various visualisation concepts for the Light Shifting Display. Results from this low-fidelity prototyping activities were systematically analysed and fed into the next process stages.</div>
         </div>
         <div class="col-sm-12">
-            <img style="width:100%" src="imgs/light_shifting_display_co_design.jpg" alt="Co design session" />
+            <img class="lazy" style="width:100%" data-src="imgs/light_shifting_display_co_design.jpg" alt="Co design session" />
+        </div>
+        <div class="col-sm-12" style="padding-bottom: 0px;">
+            <h3>Webinterface</h3>
+        </div>
+        <div class="col-sm-4">
+            <ul class="slides">
+                <input type="radio" name="radio-btn" id="img-1" checked />
+                <li class="slide-container">
+                    <div class="slide">
+                        <img class="lazy" data-src="imgs/light_shifting_display_webinterface1.jpg"/>
+                    </div>
+                </li>
+
+                <input type="radio" name="radio-btn" id="img-2" />
+                <li class="slide-container">
+                    <div class="slide">
+                        <img class="lazy" data-src="imgs/light_shifting_display_webinterface2.jpg"/>
+                    </div>
+                </li>
+
+                <input type="radio" name="radio-btn" id="img-3" />
+                <li class="slide-container">
+                    <div class="slide">
+                        <img class="lazy" data-src="imgs/light_shifting_display_webinterface3.jpg" />
+                    </div>
+                </li>
+
+                <input type="radio" name="radio-btn" id="img-4" />
+                <li class="slide-container">
+                    <div class="slide">
+                        <img class="lazy" data-src="imgs/light_shifting_display_webinterface4.jpg" />
+                    </div>
+                </li>
+
+                <li class="nav-dots">
+                    <label for="img-1" class="nav-dot" id="img-dot-1"></label>
+                    <label for="img-2" class="nav-dot" id="img-dot-2"></label>
+                    <label for="img-3" class="nav-dot" id="img-dot-3"></label>
+                    <label for="img-4" class="nav-dot" id="img-dot-4"></label>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-8">
+            <div class="text">Following a human-centered design process, experts and end-users were involved during the concept development phase. Therefore, the purpose-built prototyping toolkit Sketching-in-Light was used as a creative enabler during several co-design activities. In this sessions, workshop participants created various visualisation concepts for the Light Shifting Display. Results from this low-fidelity prototyping activities were systematically analysed and fed into the next process stages.</div>
         </div>
         <div class="col-sm-12">
             <h3>Evaluation</h3>
             <div class="text">In the course of a long-term user study, we deployed the Light Shifting Display in three family households over seven weeks in total. Quantitative data in the form of interaction logs and qualitative data obtained through interviews after the deployment, indicated that the participants were engaged through the prototype and used it during the whole time of the deployment. Key findings include that all participants preferred to access the energy performance data via the Light Shifting Display instead of using the existing web app that is provided by our industrial partner.</div>
         </div>
         <div class="col-sm-6">
-            <img style="width:100%" src="imgs/light_shifting_display_home.jpg" alt="Light Shifting Display at home" />
+            <img class="lazy" style="width:100%" data-src="imgs/light_shifting_display_home.jpg" alt="Light Shifting Display at home" />
         </div>
         <div class="col-sm-6">
-            <img style="width:100%" src="imgs/light_shifting_display_home2.jpg" alt="Light Shifting Display at home" />
+            <img class="lazy" style="width:100%" data-src="imgs/light_shifting_display_home2.jpg" alt="Light Shifting Display at home" />
         </div>
         <div class="col-sm-6">
             <h3>Exhibition</h3>
