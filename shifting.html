@@ -138,8 +138,8 @@
     <div class="row">
         <div class="col-sm-12">
             <h3>About</h3>
-            <div style="padding-bottom: 24px;" class="text">The Light Shifting Display is a novel type of low-resolution lighting display that presents real-time information in an ambient manner through various information encodings. The prototype features a discrete and continuous display mode to support a wide range of visual representations and to explore the boundaries between display and luminaire design.</div>
-            <div class="text">I developed the Light Shifting Display during a research stay at the Design Lab at the University of Sydney. The project was conducted in close collaboration with a partner from the industry. The prototype was evaluated in a real-world context in three family households over several weeks, displaying energy performance data. Preliminary findings indicate that the display gained a lot of attention and might provide a promising alternative towards high-resolution media in the Internet of Things Era.</div>
+            <div style="padding-bottom: 24px;" class="text">The Light Shifting Display is a novel type of low-resolution lighting display that presents real-time information in an ambient manner. The prototype features a discrete and continuous display mode to support a wide range of visual representations and to explore the boundaries between display and luminaire design.</div>
+            <div class="text">I developed the Light Shifting Display during a research stay at the <a href="http://sydney.edu.au/architecture/research/designlab/index.shtml">Design Lab</a> at the University of Sydney. The project was conducted in close collaboration with the Sydney-based green-tech start-up <a href="https://www.solaranalytics.com/au/">Solar Analytics</a>. The prototype was evaluated in a real-world context in three family households over several weeks, displaying energy performance data. Preliminary findings indicate that the display gained a lot of attention and might provide a promising alternative towards high-resolution media in the Internet of Things Era.</div>
         </div>
         <div class="col-sm-12">
             <div class='embed-container'>
@@ -155,6 +155,9 @@
         </div>
         <div class="col-sm-12" style="padding-bottom: 0px;">
             <h3>Webinterface</h3>
+        </div>
+        <div class="col-sm-8">
+            <div class="text">For turning the display on and off and dimming the brightness, a rotary knob is attached to the housing. More sophisticated functionalities, which exceed the functional scope of an ordinary lamp, can be changed via a web interface. The interface consists of a list showing the different visualisations that can be selected by the user. Further, for each visualisation customised settings can be made: for example, changing the predominant colours of each visualisation using a hue, saturation and brightness (HSB) colour wheel. Additionally, the mobile interface provides short descriptions of each visualisations in order to support users learning the meaning of the ambient information encodings.</div>
         </div>
         <div class="col-sm-4">
             <ul class="slides">
@@ -194,12 +197,13 @@
                 </li>
             </ul>
         </div>
-        <div class="col-sm-8">
-            <div class="text">Following a human-centered design process, experts and end-users were involved during the concept development phase. Therefore, the purpose-built prototyping toolkit Sketching-in-Light was used as a creative enabler during several co-design activities. In this sessions, workshop participants created various visualisation concepts for the Light Shifting Display. Results from this low-fidelity prototyping activities were systematically analysed and fed into the next process stages.</div>
+        <div class="col-sm-12">
+            <h3>Implementation</h3>
+            <div class="text">The core unit of the Light Shifting Display is a Raspberry Pi 3 and 17 high-power RGB LED strips with 12 single controllable LEDs that are controlled via an ArtNet DMX Ethernet controller. For shifting the visual representation from discrete to continuous, a linear motion system moves the LEDs behind the front panel forwards and backwards. The software for generating the visualisations based on the retrieved energy-performance data is written in Java using the Processing-library. The web application for controlling the display is implemented using the Meteor framework.</div>
         </div>
         <div class="col-sm-12">
             <h3>Evaluation</h3>
-            <div class="text">In the course of a long-term user study, we deployed the Light Shifting Display in three family households over seven weeks in total. Quantitative data in the form of interaction logs and qualitative data obtained through interviews after the deployment, indicated that the participants were engaged through the prototype and used it during the whole time of the deployment. Key findings include that all participants preferred to access the energy performance data via the Light Shifting Display instead of using the existing web app that is provided by our industrial partner.</div>
+            <div class="text">In the course of a long-term user study, we deployed the Light Shifting Display in three family households over seven weeks in total. Quantitative data in the form of interaction logs and qualitative data obtained through interviews afterwards, indicated that the participants were engaged through the prototype and used it during the whole time of the deployment. Key findings include that all participants preferred to use the Light Shifting Display instead of accessing the data via their smartphones or desktop computers.</div>
         </div>
         <div class="col-sm-6">
             <img class="lazy" style="width:100%" data-src="imgs/light_shifting_display_home.jpg" alt="Light Shifting Display at home" />
@@ -207,9 +211,15 @@
         <div class="col-sm-6">
             <img class="lazy" style="width:100%" data-src="imgs/light_shifting_display_home2.jpg" alt="Light Shifting Display at home" />
         </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Project Team</h3>
+            <div class="text">Marius Hoggenmüller, <a href="http://www.martintomitsch.com/">Martin Tomitsch</a>, <a href="http://www.dielight.con">Alexander Wiethoff</a>.</div>
+        </div>
         <div class="col-sm-6">
             <h3>Exhibition</h3>
-            <div class="text">7 September - 11 September 2017 - Ars Electronica Festival / Linz (Austria)</div>
+            <div class="text">7 September - 11 September 2017 - <a href="https://www.aec.at/ai/de/">Ars Electronica Festival</a> / Linz (Austria)</div>
         </div>
     </div>
     <div class="footer">

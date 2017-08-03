@@ -10,6 +10,11 @@ form,fieldset,input,textarea,p,blockquote,th,td {
 a{
 	text-decoration:none;
 }
+
+.text a {
+    color: #d23848 !important;
+}
+
 table {
     border-spacing: 0;
 }
@@ -384,7 +389,7 @@ h2 {
 h3 {
 	/*line-height: 48px;
 	height: 48px;*/
-	padding-top: 24px;
+	padding-top: 32px;
 	padding-bottom: 24px;
 	font-size: 24px;
 	color: rgba(0,0,0,0.8);
